@@ -1,10 +1,10 @@
 Package: rasterpic
 Title: Create a Spatial Raster from Plain Images
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     person("Diego", "Hernangómez", , "diego.hernangomezherrero@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-8457-4658"))
-Description: Creates a spatial raster, as the ones provided by 'terra',
+Description: Create a spatial raster, as the ones provided by 'terra',
     from regular pictures.
 License: MIT + file LICENSE
 URL: https://dieghernan.github.io/rasterpic/,
@@ -18,9 +18,9 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 RoxygenNote: 7.1.2
 NeedsCompilation: no
-Packaged: 2022-01-25 15:25:36 UTC; diego
+Packaged: 2022-02-18 08:32:39 UTC; diego
 Author: Diego Hernangómez [aut, cre, cph]
     (<https://orcid.org/0000-0001-8457-4658>)
 Maintainer: Diego Hernangómez <diego.hernangomezherrero@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-01-27 08:30:02 UTC
+Date/Publication: 2022-02-18 08:50:02 UTC

@@ -25,6 +25,7 @@ test_fun <- function(x, prefix, ...) {
 
 test_that("UK plots regular", {
   skip_if_not_installed("vdiffr")
+  skip_on_cran()
 
   x <- sf::st_read(system.file("gpkg/UK.gpkg", package = "rasterpic"),
     quiet = TRUE
@@ -34,6 +35,7 @@ test_that("UK plots regular", {
 
 test_that("UK plots expand", {
   skip_if_not_installed("vdiffr")
+  skip_on_cran()
 
   x <- sf::st_read(system.file("gpkg/UK.gpkg", package = "rasterpic"),
     quiet = TRUE
@@ -44,6 +46,7 @@ test_that("UK plots expand", {
 
 test_that("UK plots aligns", {
   skip_if_not_installed("vdiffr")
+  skip_on_cran()
 
   x <- sf::st_read(system.file("gpkg/UK.gpkg", package = "rasterpic"),
     quiet = TRUE
@@ -56,6 +59,7 @@ test_that("UK plots aligns", {
 
 test_that("UK plots crop and mask", {
   skip_if_not_installed("vdiffr")
+  skip_on_cran()
 
   x <- sf::st_read(system.file("gpkg/UK.gpkg", package = "rasterpic"),
     quiet = TRUE

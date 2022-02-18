@@ -1,4 +1,4 @@
-test_fun <- function(x, prefix, ...) {
+test_fun_spat <- function(x, prefix, ...) {
   images <- list.files(system.file("img", package = "rasterpic"),
     full.names = TRUE
   )
@@ -11,7 +11,7 @@ test_fun <- function(x, prefix, ...) {
       paste(prefix, "_", basename(file)),
       function() {
         terra::plotRGB(raster, colNA = "red", bgalpha = 0)
-        plot(sf::st_geometry(x),
+        terra::plot(x,
           add = TRUE,
           border = "green",
           lwd = 2
@@ -23,46 +23,61 @@ test_fun <- function(x, prefix, ...) {
 
 
 
-test_that("Austria plots regular", {
+test_that("SpatVector plots regular", {
   skip_if_not_installed("vdiffr")
   skip_on_cran()
+
   x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
-  test_fun(x, "regular")
+  x <- terra::vect(x)
+  expect_s4_class(x, "SpatVector")
+
+  test_fun_spat(x, "regular")
 })
 
-test_that("Austria plots expand", {
+test_that("SpatVector plots expand", {
   skip_if_not_installed("vdiffr")
   skip_on_cran()
 
   x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
-  test_fun(x, "expand", expand = 1)
+  x <- terra::vect(x)
+  expect_s4_class(x, "SpatVector")
+
+  test_fun_spat(x, "expand", expand = 1)
 })
 
 
-test_that("Austria plots aligns", {
+test_that("SpatVector plots aligns", {
   skip_if_not_installed("vdiffr")
   skip_on_cran()
+
   x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
-  test_fun(x, "left", halign = 0)
-  test_fun(x, "right", halign = 1)
-  test_fun(x, "bottom", valign = 0)
-  test_fun(x, "top", valign = 1)
+  x <- terra::vect(x)
+  expect_s4_class(x, "SpatVector")
+
+  test_fun_spat(x, "left", halign = 0)
+  test_fun_spat(x, "right", halign = 1)
+  test_fun_spat(x, "bottom", valign = 0)
+  test_fun_spat(x, "top", valign = 1)
 })
 
-test_that("Austria plots crop and mask", {
+test_that("SpatVector plots crop and mask", {
   skip_if_not_installed("vdiffr")
   skip_on_cran()
+
   x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
-  test_fun(x, "crop", crop = TRUE)
-  test_fun(x, "mask", mask = TRUE)
-  test_fun(x, "maskinv", mask = TRUE, inverse = TRUE)
-  test_fun(x, "maskcrop", crop = TRUE, mask = TRUE)
+  x <- terra::vect(x)
+  expect_s4_class(x, "SpatVector")
+
+  test_fun_spat(x, "crop", crop = TRUE)
+  test_fun_spat(x, "mask", mask = TRUE)
+  test_fun_spat(x, "maskinv", mask = TRUE, inverse = TRUE)
+  test_fun_spat(x, "maskcrop", crop = TRUE, mask = TRUE)
 })

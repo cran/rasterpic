@@ -3,6 +3,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   out.width = "50%",
+  message = FALSE,
+  warning = FALSE,
   fig.align = "center"
 )
 
