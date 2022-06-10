@@ -1,3 +1,7 @@
+# rasterpic 0.2.1
+
+-   Add **tidyterra** to 'Suggests'
+
 # rasterpic 0.2.0
 
 -   Add support for:
