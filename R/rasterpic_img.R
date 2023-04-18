@@ -172,10 +172,9 @@ rasterpic_img <- function(x,
                           mask = FALSE,
                           inverse = FALSE,
                           crs) {
-
   # Initial validations
-  if (halign < 0 | halign > 1) stop("'haling' should be between 0 and 1")
-  if (valign < 0 | valign > 1) stop("'valing' should be between 0 and 1")
+  if (halign < 0 || halign > 1) stop("'halign' should be between 0 and 1")
+  if (valign < 0 || valign > 1) stop("'valign' should be between 0 and 1")
 
   # A. Extract values from x: crs and initial extent----
 
@@ -259,5 +258,6 @@ rasterpic_img <- function(x,
     }
   }
 
+  terra::RGB(new_rast) <- c(1, 2, 3)
   return(new_rast)
 }

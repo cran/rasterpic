@@ -2,10 +2,9 @@
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  out.width = "50%",
   message = FALSE,
   warning = FALSE,
-  fig.align = "center"
+  out.width = "100%"
 )
 
 ## ----setup--------------------------------------------------------------------
@@ -13,44 +12,40 @@ library(sf)
 library(terra)
 library(rasterpic)
 
-x <- st_read(system.file("gpkg/austria.gpkg",
-  package = "rasterpic"
-),
-quiet = TRUE
-)
-img <- system.file("img/vertical.png",
-  package = "rasterpic"
-)
+# Plot
+library(tidyterra)
+library(ggplot2)
+
+# Shape and image
+x <- read_sf(system.file("gpkg/austria.gpkg", package = "rasterpic"))
+img <- system.file("img/vertical.png", package = "rasterpic")
 
 # Create!
 
 default <- rasterpic_img(x, img)
 
-plotRGB(default)
-plot(st_geometry(x), add = TRUE, col = "grey90")
+autoplot(default) +
+  geom_sf(data = x)
 
 ## -----------------------------------------------------------------------------
 expand <- rasterpic_img(x, img, expand = 1)
 
-plotRGB(expand)
-plot(st_geometry(x), add = TRUE, col = "grey90")
+
+autoplot(expand) +
+  geom_sf(data = x)
 
 ## -----------------------------------------------------------------------------
 bottom <- rasterpic_img(x, img, valign = 0)
 
-plotRGB(bottom)
-plot(st_geometry(x), add = TRUE, col = "grey90")
+autoplot(bottom) +
+  geom_sf(data = x)
 
 ## -----------------------------------------------------------------------------
 mask <- rasterpic_img(x, img, crop = TRUE, mask = TRUE)
 
-plotRGB(mask)
+autoplot(mask)
 
-maskinverse <- rasterpic_img(x, img,
-  crop = TRUE,
-  mask = TRUE,
-  inverse = TRUE
-)
+maskinverse <- rasterpic_img(x, img, crop = TRUE, mask = TRUE, inverse = TRUE)
 
-plotRGB(maskinverse)
+autoplot(maskinverse)
 

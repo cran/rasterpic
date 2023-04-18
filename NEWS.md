@@ -1,3 +1,15 @@
+# rasterpic 0.2.2
+
+-   Remove unused dependencies
+
+-   Improve docs.
+
+-   Fix typos on messages.
+
+-   Declares output as RGB raster with `terra::RGB()`.
+
+-   Add ggplot2 to "Suggests".
+
 # rasterpic 0.2.1
 
 -   Add **tidyterra** to 'Suggests'
