@@ -11,7 +11,8 @@ status](https://www.r-pkg.org/badges/version/rasterpic)](https://CRAN.R-project.
 results](https://badges.cranchecks.info/worst/rasterpic.svg)](https://cran.r-project.org/web/checks/check_results_rasterpic.html)
 [![R-CMD-check](https://github.com/dieghernan/rasterpic/actions/workflows/check-full.yaml/badge.svg)](https://github.com/dieghernan/rasterpic/actions/workflows/check-full.yaml)
 [![codecov](https://codecov.io/gh/dieghernan/rasterpic/branch/main/graph/badge.svg?token=jSZ4RIsj91)](https://app.codecov.io/gh/dieghernan/rasterpic)
-[![r-universe](https://dieghernan.r-universe.dev/badges/rasterpic)](https://dieghernan.r-universe.dev/)
+[![r-universe](https://dieghernan.r-universe.dev/badges/rasterpic)](https://dieghernan.r-universe.dev/rasterpic)
+[![CodeFactor](https://www.codefactor.io/repository/github/dieghernan/rasterpic/badge)](https://www.codefactor.io/repository/github/dieghernan/rasterpic)
 [![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.5910095-blue)](https://doi.org/10.5281/zenodo.5910095)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -42,12 +43,11 @@ Alternatively, you can install **rasterpic** using the
 [r-universe](https://dieghernan.r-universe.dev/rasterpic):
 
 ``` r
-# Enable this universe
-options(repos = c(
-  dieghernan = "https://dieghernan.r-universe.dev",
-  CRAN = "https://cloud.r-project.org"
+# Install rasterpic in R:
+install.packages("rasterpic", repos = c(
+  "https://dieghernan.r-universe.dev",
+  "https://cloud.r-project.org"
 ))
-install.packages("rasterpic")
 ```
 
 ## Example
@@ -122,25 +122,21 @@ autoplot(uk_flag2) +
 
 ## Citation
 
-To cite ‘rasterpic’ in publications use:
-
-Hernangomez D (2023). rasterpic: Create a Spatial Raster from Plain
-Images. <https://doi.org/10.5281/zenodo.5910095>,
-<https://dieghernan.github.io/rasterpic/>
+<p>
+Hernangómez D (2023). <em>rasterpic: Create a Spatial Raster from Plain
+Images</em>.
+<a href="https://doi.org/10.5281/zenodo.5910095">doi:10.5281/zenodo.5910095</a>,
+<a href="https://dieghernan.github.io/rasterpic/">https://dieghernan.github.io/rasterpic/</a>.
+</p>
 
 A BibTeX entry for LaTeX users is:
 
     @Manual{R-rasterpic,
-      title = {rasterpic: Create a Spatial Raster from Plain Images},
+      title = {{rasterpic}: Create a Spatial Raster from Plain Images},
       author = {Diego Hernangómez},
       year = {2023},
-      version = {0.2.2},
+      version = {0.2.3},
       doi = {10.5281/zenodo.5910095},
       url = {https://dieghernan.github.io/rasterpic/},
       abstract = {Create a spatial raster, as the ones provided by terra, from regular pictures.},
     }
-
-## Contribute
-
-Check the GitHub page for [source
-code](https://github.com/dieghernan/rasterpic/).
