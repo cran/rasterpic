@@ -1,3 +1,13 @@
+# rasterpic 0.2.4
+
+-   Ensure `SpatVector`s always have `crs`.
+-   If the image has less than 3 channels the raster output does not have the
+    property RGB (`terra::has.RGB()` is `FALSE`). This is expected to be a
+    corner case.
+-   If the image file (i.e. `tiff`) already has a RGB definition, keep that in
+    the output.
+-   Update docs and tests.
+
 # rasterpic 0.2.3
 
 -   Now `asp_ratio` is an internal function.
