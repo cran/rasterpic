@@ -30,7 +30,6 @@ autoplot(default) +
 ## -----------------------------------------------------------------------------
 expand <- rasterpic_img(x, img, expand = 1)
 
-
 autoplot(expand) +
   geom_sf(data = x)
 

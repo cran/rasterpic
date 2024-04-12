@@ -10,6 +10,7 @@ status](https://www.r-pkg.org/badges/version/rasterpic)](https://CRAN.R-project.
 [![CRAN
 results](https://badges.cranchecks.info/worst/rasterpic.svg)](https://cran.r-project.org/web/checks/check_results_rasterpic.html)
 [![R-CMD-check](https://github.com/dieghernan/rasterpic/actions/workflows/check-full.yaml/badge.svg)](https://github.com/dieghernan/rasterpic/actions/workflows/check-full.yaml)
+[![R-hub](https://github.com/dieghernan/rasterpic/actions/workflows/rhub.yaml/badge.svg)](https://github.com/dieghernan/rasterpic/actions/workflows/rhub.yaml)
 [![codecov](https://codecov.io/gh/dieghernan/rasterpic/branch/main/graph/badge.svg?token=jSZ4RIsj91)](https://app.codecov.io/gh/dieghernan/rasterpic)
 [![r-universe](https://dieghernan.r-universe.dev/badges/rasterpic)](https://dieghernan.r-universe.dev/rasterpic)
 [![CodeFactor](https://www.codefactor.io/repository/github/dieghernan/rasterpic/badge)](https://www.codefactor.io/repository/github/dieghernan/rasterpic)
@@ -22,11 +23,11 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 <!-- badges: end -->
 
 **rasterpic** is a tiny package with one single goal: to transform an
-image into a spatial raster.
+image into a `SpatRaster` object (see `?terra::SpatRaster`).
 
 ## Installation
 
-Install `rasterpic` from
+Install **rasterpic** from
 [**CRAN**](https://CRAN.R-project.org/package=rasterpic):
 
 ``` r
@@ -36,7 +37,7 @@ install.packages("rasterpic")
 You can install the developing version of **rasterpic** with:
 
 ``` r
-devtools::install_github("dieghernan/rasterpic")
+remotes::install_github("dieghernan/rasterpic")
 ```
 
 Alternatively, you can install **rasterpic** using the
@@ -55,14 +56,13 @@ install.packages("rasterpic", repos = c(
 This package allows you to create cool maps by using a wide variety of
 objects:
 
-- Spatial object of the **sf** package: `sf`, `sfc`, `sfg`or `bbox`.
-
-- Spatial objects of the **terra** package: `SpatRaster`, `SpatVector`,
-  `SpatExtent`.
-
+- Spatial object created with the **sf** package: `sf`, `sfc`, `sfg` or
+  `bbox`.
+- Spatial objects created with the **terra** package: `SpatRaster`,
+  `SpatVector`, `SpatExtent`.
 - A vector of coordinates with the form `c(xmin, ymin, xmax, yman)`
 
-An example using a `sf` object:
+An example using an `sf` object:
 
 ``` r
 library(rasterpic)
@@ -72,6 +72,10 @@ library(terra)
 # The flag of the United Kingdom
 img <- system.file("img/UK_flag.png", package = "rasterpic")
 uk <- read_sf(system.file("gpkg/UK.gpkg", package = "rasterpic"))
+
+
+class(uk)
+#> [1] "sf"         "tbl_df"     "tbl"        "data.frame"
 
 # Rasterize!
 uk_flag <- rasterpic_img(uk, img)
@@ -123,8 +127,8 @@ autoplot(uk_flag2) +
 ## Citation
 
 <p>
-Hernangómez D (2024). <em>rasterpic: Create a Spatial Raster from Plain
-Images</em>.
+Hernangómez D (2024). <em>rasterpic: Convert Digital Images into
+SpatRaster Objects</em>.
 <a href="https://doi.org/10.5281/zenodo.5910095">doi:10.5281/zenodo.5910095</a>,
 <a href="https://dieghernan.github.io/rasterpic/">https://dieghernan.github.io/rasterpic/</a>.
 </p>
@@ -132,11 +136,11 @@ Images</em>.
 A BibTeX entry for LaTeX users is:
 
     @Manual{R-rasterpic,
-      title = {{rasterpic}: Create a Spatial Raster from Plain Images},
+      title = {{rasterpic}: Convert Digital Images into {SpatRaster} Objects},
       author = {Diego Hernangómez},
       year = {2024},
-      version = {0.2.4},
+      version = {0.2.5},
       doi = {10.5281/zenodo.5910095},
       url = {https://dieghernan.github.io/rasterpic/},
-      abstract = {Create a spatial raster, as the ones provided by terra, from regular pictures.},
+      abstract = {Generate SpatRaster objects, as defined by the terra package, from digital images, using a specified spatial object as a geographical reference.},
     }
