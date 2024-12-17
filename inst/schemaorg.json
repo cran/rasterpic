@@ -28,11 +28,11 @@
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "runtimePlatform": "R version 4.3.3 (2024-02-29 ucrt)",
-      "version": "0.2.5"
+      "runtimePlatform": "R version 4.4.2 (2024-10-31 ucrt)",
+      "version": "0.2.6"
     },
     {
-      "id": "https://doi.org/10.5281/zenodo.5910095",
+      "id": "https://doi.org/10.32614/CRAN.package.rasterpic",
       "type": "SoftwareSourceCode",
       "author": {
         "type": "Person",
