@@ -1,6 +1,6 @@
 Package: rasterpic
 Title: Convert Digital Images into 'SpatRaster' Objects
-Version: 0.2.6
+Version: 0.3.0
 Authors@R: 
     person("Diego", "Hernangómez", , "diego.hernangomezherrero@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-8457-4658"))
@@ -26,9 +26,9 @@ RoxygenNote: 7.3.2
 X-schema.org-keywords: cran, jpeg, jpg, maps, png, r, r-package,
         r-stats, raster, rstats, sf, terra, tif, tiff, cran-r
 NeedsCompilation: no
-Packaged: 2024-12-17 11:45:50 UTC; diego
+Packaged: 2025-03-19 17:37:20 UTC; diego
 Author: Diego Hernangómez [aut, cre, cph]
     (<https://orcid.org/0000-0001-8457-4658>)
 Maintainer: Diego Hernangómez <diego.hernangomezherrero@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-12-17 12:00:02 UTC
+Date/Publication: 2025-03-19 17:50:02 UTC

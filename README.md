@@ -37,7 +37,8 @@ install.packages("rasterpic")
 You can install the developing version of **rasterpic** with:
 
 ``` r
-remotes::install_github("dieghernan/rasterpic")
+# install.packages("pak")
+pak::pak("dieghernan/rasterpic")
 ```
 
 Alternatively, you can install **rasterpic** using the
@@ -90,9 +91,9 @@ uk_flag
 #> coord. ref. : WGS 84 / Pseudo-Mercator (EPSG:3857) 
 #> source(s)   : memory
 #> colors RGB  : 1, 2, 3 
-#> names       : lyr.1, lyr.2, lyr.3 
-#> min values  :     0,    14,    35 
-#> max values  :   255,   255,   255
+#> names       :   r,   g,   b 
+#> min values  :   0,  14,  35 
+#> max values  : 255, 255, 255
 
 # Plot it!
 # Using ggplot2 + tidyterra
@@ -129,7 +130,7 @@ autoplot(uk_flag2) +
 ## Citation
 
 <p>
-Hernangómez D (2024). <em>rasterpic: Convert Digital Images into
+Hernangómez D (2025). <em>rasterpic: Convert Digital Images into
 SpatRaster Objects</em>.
 <a href="https://doi.org/10.32614/CRAN.package.rasterpic">doi:10.32614/CRAN.package.rasterpic</a>,
 <a href="https://dieghernan.github.io/rasterpic/">https://dieghernan.github.io/rasterpic/</a>.
@@ -141,8 +142,48 @@ A BibTeX entry for LaTeX users is:
       title = {{rasterpic}: Convert Digital Images into {SpatRaster} Objects},
       doi = {10.32614/CRAN.package.rasterpic},
       author = {Diego Hernangómez},
-      year = {2024},
-      version = {0.2.6},
+      year = {2025},
+      version = {0.3.0},
       url = {https://dieghernan.github.io/rasterpic/},
       abstract = {Generate SpatRaster objects, as defined by the terra package, from digital images, using a specified spatial object as a geographical reference.},
     }
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+All contributions to this project are gratefully acknowledged using the
+[`allcontributors` package](https://github.com/ropensci/allcontributors)
+following the [allcontributors](https://allcontributors.org)
+specification. Contributions of any kind are welcome!
+
+### Code
+
+<table class="table allctb-table">
+<tr>
+<td align="center">
+<a href="https://github.com/dieghernan">
+<img src="https://avatars.githubusercontent.com/u/25656809?v=4" width="100px;" class="allctb-avatar" alt=""/>
+</a><br>
+<a href="https://github.com/dieghernan/rasterpic/commits?author=dieghernan">dieghernan</a>
+</td>
+</tr>
+</table>
+
+### Issues
+
+<table class="table allctb-table">
+<tr>
+<td align="center">
+<a href="https://github.com/rhijmans">
+<img src="https://avatars.githubusercontent.com/u/11481397?u=c7520bbc8ee90abe741324e8c6a2f2051932dea3&v=4" width="100px;" class="allctb-avatar" alt=""/>
+</a><br>
+<a href="https://github.com/dieghernan/rasterpic/issues?q=is%3Aissue+author%3Arhijmans">rhijmans</a>
+</td>
+</tr>
+</table>
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
