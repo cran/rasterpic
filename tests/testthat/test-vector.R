@@ -1,6 +1,7 @@
 test_that("Test vector", {
   img <- system.file("img/UK_flag.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/UK.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/UK.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
@@ -13,7 +14,7 @@ test_that("Test vector", {
 
   expect_true(terra::crs(raster) == "")
 
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
   expect_equal(asp_ratio(raster), dim(png_dim)[2] / dim(png_dim)[1])
 
   # Same y coords
@@ -27,7 +28,8 @@ test_that("Test vector", {
 
 test_that("Test vector with projs", {
   img <- system.file("img/UK_flag.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/UK.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/UK.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
@@ -41,8 +43,7 @@ test_that("Test vector with projs", {
   raster <- rasterpic_img(x, img, crs = crs_wkt_sf)
   expect_false(terra::crs(raster) == "")
 
-
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
   expect_equal(asp_ratio(raster), dim(png_dim)[2] / dim(png_dim)[1])
 
   # Same y coords
@@ -55,7 +56,6 @@ test_that("Test vector with projs", {
 
   # On mask message
   expect_message(mask <- rasterpic_img(x, img, crs = crs_wkt_sf, mask = TRUE))
-
 
   expect_true(terra::ext(raster) == terra::ext(mask))
 

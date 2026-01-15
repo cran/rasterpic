@@ -13,17 +13,13 @@ rpic_read <- function(img, crs = NA) {
     # Try to download
     tmp <- tempfile(fileext = paste0(".", tools::file_ext(img)))
 
-    # nocov start
     err_dwnload <- tryCatch(
-      download.file(img, tmp,
-        quiet = TRUE,
-        mode = "wb"
-      ),
+      download.file(img, tmp, quiet = TRUE, mode = "wb"),
       warning = function(x) {
         TRUE
       },
       error = function(x) {
-        TRUE
+        TRUE # nocov
       }
     )
 
@@ -31,17 +27,22 @@ rpic_read <- function(img, crs = NA) {
     if (err_dwnload) {
       stop("Cannot reach img on url ", img, call. = FALSE)
     }
-    # nocov end
 
-    # If everything is well, rename img
+    # If everything is ok, rename img
     img <- tmp
   }
 
-  if (!file.exists(img)) stop("'img' file not found", call. = FALSE)
+  if (!file.exists(img)) {
+    stop("'img' file not found", call. = FALSE)
+  }
+
+  if (!tools::file_ext(img) %in% c("jpg", "jpeg", "tif", "tiff", "png")) {
+    stop("'img' only accepts 'png', 'jpg' or 'jpeg' files", call. = FALSE)
+  }
+
   # pngs
   if ("png" %in% tools::file_ext(img)) {
     pngfile <- png::readPNG(img) * 255
-
 
     # Give transparency if available
     if (all(dim(pngfile)[3] == 4, !is.na(dim(pngfile)[3]))) {
@@ -59,16 +60,16 @@ rpic_read <- function(img, crs = NA) {
 
     terra::crs(rast) <- crs
 
-    return(rast)
+    rast
   } else if (tools::file_ext(img) %in% c("jpg", "jpeg", "tif", "tiff")) {
     # jpg/jpeg and tif/tiff
 
-    rast <- suppressWarnings(terra::rast(img))
+    rast <- terra::rast(img, noflip = TRUE)
     terra::crs(rast) <- crs
-    return(rast)
-  } else {
-    stop("'img' only accepts 'png', 'jpg' or 'jpeg' files", call. = FALSE)
+    rast
   }
+
+  rast
 }
 
 

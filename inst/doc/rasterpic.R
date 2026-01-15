@@ -20,7 +20,7 @@ library(ggplot2)
 x <- read_sf(system.file("gpkg/austria.gpkg", package = "rasterpic"))
 img <- system.file("img/vertical.png", package = "rasterpic")
 
-# Create!
+# Create the raster!
 
 default <- rasterpic_img(x, img)
 

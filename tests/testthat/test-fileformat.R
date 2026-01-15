@@ -1,12 +1,13 @@
 test_that("Test all image formats with UK", {
   img <- system.file("img/UK_flag.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/UK.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/UK.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
   raster <- rasterpic_img(x, img)
   expect_true(terra::has.RGB(raster))
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
   expect_equal(asp_ratio(raster), dim(png_dim)[2] / dim(png_dim)[1])
 
   # Same y coords
@@ -17,7 +18,8 @@ test_that("Test all image formats with UK", {
   expect_true(terra::xmin(raster) < sf::st_bbox(x)[1])
   expect_true(terra::xmax(raster) > sf::st_bbox(x)[3])
 
-  otherformats <- list.files(system.file("img", package = "rasterpic"),
+  otherformats <- list.files(
+    system.file("img", package = "rasterpic"),
     pattern = "^UK_flag",
     full.names = TRUE
   )
@@ -35,14 +37,15 @@ test_that("Test all image formats with UK", {
 
 test_that("Test all image formats with AT vertical", {
   img <- system.file("img/vertical.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
   raster <- rasterpic_img(x, img)
   expect_true(terra::has.RGB(raster))
 
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
   expect_equal(asp_ratio(raster), dim(png_dim)[2] / dim(png_dim)[1])
   # Different y coords
   expect_true(terra::ymin(raster) < sf::st_bbox(x)[2])
@@ -52,7 +55,8 @@ test_that("Test all image formats with AT vertical", {
   expect_true(terra::xmin(raster) == sf::st_bbox(x)[1])
   expect_true(terra::xmax(raster) == sf::st_bbox(x)[3])
 
-  otherformats <- list.files(system.file("img", package = "rasterpic"),
+  otherformats <- list.files(
+    system.file("img", package = "rasterpic"),
     pattern = "^vertical",
     full.names = TRUE
   )
@@ -77,7 +81,7 @@ test_that("Test all image formats with a raster", {
 
   raster <- rasterpic_img(x, img)
   expect_true(terra::has.RGB(raster))
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
   expect_equal(asp_ratio(raster), dim(png_dim)[2] / dim(png_dim)[1])
   # Different y coords
   expect_true(terra::ymin(raster) < terra::ymin(x))
@@ -87,7 +91,8 @@ test_that("Test all image formats with a raster", {
   expect_true(terra::xmin(raster) == terra::xmin(x))
   expect_true(terra::xmax(raster) == terra::xmax(x))
 
-  otherformats <- list.files(system.file("img", package = "rasterpic"),
+  otherformats <- list.files(
+    system.file("img", package = "rasterpic"),
     pattern = "^vertical",
     full.names = TRUE
   )
@@ -104,7 +109,8 @@ test_that("Test all image formats with a raster", {
 
 test_that("Test all image formats with sfc vertical", {
   img <- system.file("img/vertical.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
@@ -114,7 +120,7 @@ test_that("Test all image formats with sfc vertical", {
   raster <- rasterpic_img(x, img)
   expect_true(terra::has.RGB(raster))
 
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
   expect_equal(asp_ratio(raster), dim(png_dim)[2] / dim(png_dim)[1])
   # Different y coords
   expect_true(terra::ymin(raster) < sf::st_bbox(x)[2])
@@ -124,7 +130,8 @@ test_that("Test all image formats with sfc vertical", {
   expect_true(terra::xmin(raster) == sf::st_bbox(x)[1])
   expect_true(terra::xmax(raster) == sf::st_bbox(x)[3])
 
-  otherformats <- list.files(system.file("img", package = "rasterpic"),
+  otherformats <- list.files(
+    system.file("img", package = "rasterpic"),
     pattern = "^vertical",
     full.names = TRUE
   )
@@ -143,7 +150,8 @@ test_that("Test all image formats with SpatExtent", {
   skip_on_cran()
 
   img <- system.file("img/vertical.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
@@ -151,7 +159,7 @@ test_that("Test all image formats with SpatExtent", {
   expect_s4_class(x, "SpatExtent")
 
   raster <- rasterpic_img(x, img, crs = "epsg:3035")
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
   expect_equal(asp_ratio(raster), dim(png_dim)[2] / dim(png_dim)[1])
   # Different y coords
   expect_true(terra::ymin(raster) < sf::st_bbox(x)[2])
@@ -161,7 +169,8 @@ test_that("Test all image formats with SpatExtent", {
   expect_true(terra::xmin(raster) == sf::st_bbox(x)[1])
   expect_true(terra::xmax(raster) == sf::st_bbox(x)[3])
 
-  otherformats <- list.files(system.file("img", package = "rasterpic"),
+  otherformats <- list.files(
+    system.file("img", package = "rasterpic"),
     pattern = "^vertical",
     full.names = TRUE
   )
@@ -178,7 +187,8 @@ test_that("Test all image formats with SpatExtent", {
 test_that("Test transparent", {
   img <- system.file("img/transparent.png", package = "rasterpic")
 
-  x <- sf::st_read(system.file("gpkg/UK.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/UK.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
@@ -188,7 +198,8 @@ test_that("Test transparent", {
 
   expect_true(terra::has.RGB(raster))
 
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
+  png_dim <- terra::colorize(png_dim, to = "rgb", alpha = TRUE)
 
   expect_true(dim(png_dim)[3] == 4)
   expect_true(terra::nlyr(raster) == 4)

@@ -22,7 +22,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 
 <!-- badges: end -->
 
-**rasterpic** is a tiny package with one single goal: to transform an
+**rasterpic** is a tiny package with a single goal: to transform an
 image into a `SpatRaster` object (see `?terra::SpatRaster`).
 
 ## Installation
@@ -56,14 +56,14 @@ install.packages("rasterpic",
 
 ## Example
 
-This package allows you to create cool maps by using a wide variety of
+This package allows you to create custom maps by using a wide variety of
 objects:
 
 - Spatial object created with the **sf** package: `sf`, `sfc`, `sfg` or
   `bbox`.
 - Spatial objects created with the **terra** package: `SpatRaster`,
   `SpatVector`, `SpatExtent`.
-- A vector of coordinates with the form `c(xmin, ymin, xmax, yman)`
+- A vector of coordinates with the form `c(xmin, ymin, xmax, ymax)`
 
 An example using an `sf` object:
 
@@ -80,12 +80,12 @@ uk <- read_sf(system.file("gpkg/UK.gpkg", package = "rasterpic"))
 class(uk)
 #> [1] "sf"         "tbl_df"     "tbl"        "data.frame"
 
-# Rasterize!
+# Rasterize the image!
 uk_flag <- rasterpic_img(uk, img)
 
 uk_flag
 #> class       : SpatRaster 
-#> dimensions  : 400, 800, 3  (nrow, ncol, nlyr)
+#> size        : 400, 800, 3  (nrow, ncol, nlyr)
 #> resolution  : 5398.319, 5398.319  (x, y)
 #> extent      : -2542183, 1776472, 6430573, 8589900  (xmin, xmax, ymin, ymax)
 #> coord. ref. : WGS 84 / Pseudo-Mercator (EPSG:3857) 
@@ -104,10 +104,10 @@ autoplot(uk_flag) +
   geom_sf(data = uk, color = alpha("blue", 0.5))
 ```
 
-<img src="man/figures/README-example-basic-1.png" width="100%" />
+<img src="man/figures/README-example-basic-1.png" alt="" width="100%" />
 
-We can also play with other parameters, as well as modifying the
-alignment of the image with respect to the object:
+We can also adjust other parameters, as well as modifying the alignment
+of the image with respect to the object:
 
 ``` r
 # Align, crop and mask
@@ -117,9 +117,9 @@ autoplot(uk_flag2) +
   geom_sf(data = uk, fill = NA)
 ```
 
-<img src="man/figures/README-align-crop-mask-1.png" width="100%" />
+<img src="man/figures/README-align-crop-mask-1.png" alt="" width="100%" />
 
-## Image formats admitted
+## Supported image formats
 
 **rasterpic** can parse the following image formats:
 
@@ -130,7 +130,8 @@ autoplot(uk_flag2) +
 ## Citation
 
 <p>
-Hernangómez D (2025). <em>rasterpic: Convert Digital Images into
+
+Hernangómez D (2026). <em>rasterpic: Convert Digital Images into
 SpatRaster Objects</em>.
 <a href="https://doi.org/10.32614/CRAN.package.rasterpic">doi:10.32614/CRAN.package.rasterpic</a>,
 <a href="https://dieghernan.github.io/rasterpic/">https://dieghernan.github.io/rasterpic/</a>.
@@ -142,48 +143,8 @@ A BibTeX entry for LaTeX users is:
       title = {{rasterpic}: Convert Digital Images into {SpatRaster} Objects},
       doi = {10.32614/CRAN.package.rasterpic},
       author = {Diego Hernangómez},
-      year = {2025},
-      version = {0.3.0},
+      year = {2026},
+      version = {0.3.1},
       url = {https://dieghernan.github.io/rasterpic/},
       abstract = {Generate SpatRaster objects, as defined by the terra package, from digital images, using a specified spatial object as a geographical reference.},
     }
-
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-All contributions to this project are gratefully acknowledged using the
-[`allcontributors` package](https://github.com/ropensci/allcontributors)
-following the [allcontributors](https://allcontributors.org)
-specification. Contributions of any kind are welcome!
-
-### Code
-
-<table class="table allctb-table">
-<tr>
-<td align="center">
-<a href="https://github.com/dieghernan">
-<img src="https://avatars.githubusercontent.com/u/25656809?v=4" width="100px;" class="allctb-avatar" alt=""/>
-</a><br>
-<a href="https://github.com/dieghernan/rasterpic/commits?author=dieghernan">dieghernan</a>
-</td>
-</tr>
-</table>
-
-### Issues
-
-<table class="table allctb-table">
-<tr>
-<td align="center">
-<a href="https://github.com/rhijmans">
-<img src="https://avatars.githubusercontent.com/u/11481397?u=c7520bbc8ee90abe741324e8c6a2f2051932dea3&v=4" width="100px;" class="allctb-avatar" alt=""/>
-</a><br>
-<a href="https://github.com/dieghernan/rasterpic/issues?q=is%3Aissue+author%3Arhijmans">rhijmans</a>
-</td>
-</tr>
-</table>
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->

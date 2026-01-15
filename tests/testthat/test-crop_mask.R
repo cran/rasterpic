@@ -1,12 +1,13 @@
 test_that("Test crop", {
   img <- system.file("img/UK_flag.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
   x0 <- rasterpic_img(x, img, expand = 0, crop = TRUE)
 
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
   expect_false(asp_ratio(x0) == dim(png_dim)[2] / dim(png_dim)[1])
 
   # Bboxes
@@ -23,16 +24,16 @@ test_that("Test crop", {
 
 test_that("Test mask", {
   img <- system.file("img/UK_flag.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
   raster <- rasterpic_img(x, img, mask = TRUE)
 
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
 
   expect_true(asp_ratio(raster) == dim(png_dim)[2] / dim(png_dim)[1])
-
 
   # Same y coords
   expect_true(terra::ymin(raster) == sf::st_bbox(x)[2])
@@ -51,7 +52,6 @@ test_that("Test mask", {
   raster_inv <- rasterpic_img(x, img, mask = TRUE, inverse = TRUE)
 
   expect_true(asp_ratio(raster_inv) == dim(png_dim)[2] / dim(png_dim)[1])
-
 
   # Same y coords
   expect_true(terra::ymin(raster_inv) == sf::st_bbox(x)[2])
@@ -69,7 +69,8 @@ test_that("Test mask", {
 
 test_that("Test crop SpatVector", {
   img <- system.file("img/UK_flag.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
@@ -78,9 +79,8 @@ test_that("Test crop SpatVector", {
 
   x0 <- rasterpic_img(x, img, expand = 0, crop = TRUE)
 
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
   expect_false(asp_ratio(x0) == dim(png_dim)[2] / dim(png_dim)[1])
-
 
   # Bboxes
   bbox_x <- as.double(sf::st_bbox(x))
@@ -96,7 +96,8 @@ test_that("Test crop SpatVector", {
 
 test_that("Test mask SpatVector", {
   img <- system.file("img/UK_flag.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
@@ -105,10 +106,9 @@ test_that("Test mask SpatVector", {
 
   raster <- rasterpic_img(x, img, mask = TRUE)
 
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
 
   expect_true(asp_ratio(raster) == dim(png_dim)[2] / dim(png_dim)[1])
-
 
   # Same y coords
   expect_true(terra::ymin(raster) == sf::st_bbox(x)[2])
@@ -127,7 +127,6 @@ test_that("Test mask SpatVector", {
   raster_inv <- rasterpic_img(x, img, mask = TRUE, inverse = TRUE)
 
   expect_true(asp_ratio(raster_inv) == dim(png_dim)[2] / dim(png_dim)[1])
-
 
   # Same y coords
   expect_true(terra::ymin(raster_inv) == sf::st_bbox(x)[2])
@@ -146,7 +145,8 @@ test_that("Test mask SpatVector", {
 
 test_that("Test crop sfg", {
   img <- system.file("img/UK_flag.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
@@ -164,9 +164,8 @@ test_that("Test crop sfg", {
 
   x0 <- rasterpic_img(x, img, expand = 0, crop = TRUE, crs = crs_wkt_sf)
 
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
   expect_false(asp_ratio(x0) == dim(png_dim)[2] / dim(png_dim)[1])
-
 
   # Bboxes
   bbox_x <- as.double(sf::st_bbox(x))
@@ -182,7 +181,8 @@ test_that("Test crop sfg", {
 
 test_that("Test mask sfg", {
   img <- system.file("img/UK_flag.png", package = "rasterpic")
-  x <- sf::st_read(system.file("gpkg/austria.gpkg", package = "rasterpic"),
+  x <- sf::st_read(
+    system.file("gpkg/austria.gpkg", package = "rasterpic"),
     quiet = TRUE
   )
 
@@ -200,10 +200,9 @@ test_that("Test mask sfg", {
 
   raster <- rasterpic_img(x, img, mask = TRUE, crs = crs_wkt_sf)
 
-  png_dim <- png::readPNG(img)
+  png_dim <- terra::rast(img, noflip = TRUE)
 
   expect_true(asp_ratio(raster) == dim(png_dim)[2] / dim(png_dim)[1])
-
 
   # Same y coords
   expect_true(terra::ymin(raster) == sf::st_bbox(x)[2])
@@ -220,15 +219,11 @@ test_that("Test mask sfg", {
 
   # Inverse
   expect_message(
-    raster_inv <- rasterpic_img(x,
-      img,
-      mask = TRUE, inverse = TRUE
-    ),
+    raster_inv <- rasterpic_img(x, img, mask = TRUE, inverse = TRUE),
     "'crs' is NA"
   )
 
   expect_true(asp_ratio(raster_inv) == dim(png_dim)[2] / dim(png_dim)[1])
-
 
   # Same y coords
   expect_true(terra::ymin(raster_inv) == sf::st_bbox(x)[2])
