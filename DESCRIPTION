@@ -1,6 +1,6 @@
 Package: rasterpic
 Title: Convert Digital Images into 'SpatRaster' Objects
-Version: 0.3.1
+Version: 0.4.0
 Authors@R: 
     person("Diego", "Hernangómez", , "diego.hernangomezherrero@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-8457-4658"))
@@ -13,8 +13,8 @@ URL: https://dieghernan.github.io/rasterpic/,
 BugReports: https://github.com/dieghernan/rasterpic/issues
 Depends: R (>= 4.1.0)
 Imports: png, sf (>= 1.0.0), terra (>= 1.8-21)
-Suggests: ggplot2, knitr, rmarkdown, testthat (>= 3.0.0), tidyterra
-VignetteBuilder: knitr
+Suggests: ggplot2, knitr, quarto, testthat (>= 3.0.0), tidyterra
+VignetteBuilder: knitr, quarto
 Config/Needs/check: curl
 Config/Needs/coverage: curl
 Config/Needs/website: dieghernan/gitdevr, tmap, mapsf, maptiles,
@@ -26,9 +26,9 @@ RoxygenNote: 7.3.3
 X-schema.org-keywords: cran, jpeg, jpg, maps, png, r, r-package,
         r-stats, raster, rstats, sf, terra, tif, tiff, cran-r
 NeedsCompilation: no
-Packaged: 2026-01-14 23:52:40 UTC; diego
+Packaged: 2026-03-21 11:10:46 UTC; diego
 Author: Diego Hernangómez [aut, cre, cph] (ORCID:
     <https://orcid.org/0000-0001-8457-4658>)
 Maintainer: Diego Hernangómez <diego.hernangomezherrero@gmail.com>
 Repository: CRAN
-Date/Publication: 2026-01-15 00:10:02 UTC
+Date/Publication: 2026-03-21 11:20:02 UTC

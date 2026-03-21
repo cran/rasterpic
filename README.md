@@ -1,7 +1,8 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rasterpic <img src="man/figures/logo.png" align="right" height="139"/>
+<!-- README.md is generated from README.qmd. Please edit that file -->
+
+# rasterpic <a href="https://dieghernan.github.io/rasterpic/"><img src="man/figures/logo.png" alt="rasterpic website" align="right" height="139"/></a>
 
 <!-- badges: start -->
 
@@ -10,7 +11,6 @@ status](https://www.r-pkg.org/badges/version/rasterpic)](https://CRAN.R-project.
 [![CRAN
 results](https://badges.cranchecks.info/worst/rasterpic.svg)](https://cran.r-project.org/web/checks/check_results_rasterpic.html)
 [![R-CMD-check](https://github.com/dieghernan/rasterpic/actions/workflows/check-full.yaml/badge.svg)](https://github.com/dieghernan/rasterpic/actions/workflows/check-full.yaml)
-[![R-hub](https://github.com/dieghernan/rasterpic/actions/workflows/rhub.yaml/badge.svg)](https://github.com/dieghernan/rasterpic/actions/workflows/rhub.yaml)
 [![codecov](https://codecov.io/gh/dieghernan/rasterpic/branch/main/graph/badge.svg?token=jSZ4RIsj91)](https://app.codecov.io/gh/dieghernan/rasterpic)
 [![r-universe](https://dieghernan.r-universe.dev/badges/rasterpic)](https://dieghernan.r-universe.dev/rasterpic)
 [![CodeFactor](https://www.codefactor.io/repository/github/dieghernan/rasterpic/badge)](https://www.codefactor.io/repository/github/dieghernan/rasterpic)
@@ -27,12 +27,21 @@ image into a `SpatRaster` object (see `?terra::SpatRaster`).
 
 ## Installation
 
+<div class="pkgdown-release">
+
 Install **rasterpic** from
 [**CRAN**](https://CRAN.R-project.org/package=rasterpic):
 
 ``` r
 install.packages("rasterpic")
 ```
+
+</div>
+
+<div class="pkgdown-devel">
+
+Check the docs of the developing version in
+<https://dieghernan.github.io/rasterpic/dev/>.
 
 You can install the developing version of **rasterpic** with:
 
@@ -46,7 +55,8 @@ Alternatively, you can install **rasterpic** using the
 
 ``` r
 # Install rasterpic in R:
-install.packages("rasterpic",
+install.packages(
+  "rasterpic",
   repos = c(
     "https://dieghernan.r-universe.dev",
     "https://cloud.r-project.org"
@@ -54,16 +64,18 @@ install.packages("rasterpic",
 )
 ```
 
+</div>
+
 ## Example
 
-This package allows you to create custom maps by using a wide variety of
-objects:
+This package allows you to create custom maps using a wide variety of
+spatial objects:
 
-- Spatial object created with the **sf** package: `sf`, `sfc`, `sfg` or
-  `bbox`.
+- Spatial objects created with the **sf** package: `sf`, `sfc`, `sfg`,
+  or `bbox`.
 - Spatial objects created with the **terra** package: `SpatRaster`,
   `SpatVector`, `SpatExtent`.
-- A vector of coordinates with the form `c(xmin, ymin, xmax, ymax)`
+- A numeric coordinate vector of the form `c(xmin, ymin, xmax, ymax)`.
 
 An example using an `sf` object:
 
@@ -104,7 +116,8 @@ autoplot(uk_flag) +
   geom_sf(data = uk, color = alpha("blue", 0.5))
 ```
 
-<img src="man/figures/README-example-basic-1.png" alt="" width="100%" />
+<img src="man/figures/README-example-basic-1.png" style="width:100.0%"
+alt="Example of use of rasterpic with the UK flag" />
 
 We can also adjust other parameters, as well as modifying the alignment
 of the image with respect to the object:
@@ -117,7 +130,8 @@ autoplot(uk_flag2) +
   geom_sf(data = uk, fill = NA)
 ```
 
-<img src="man/figures/README-align-crop-mask-1.png" alt="" width="100%" />
+<img src="man/figures/README-align-crop-mask-1.png" style="width:100.0%"
+alt="Example of use of rasterpic with the UK flag cropping to the shape" />
 
 ## Supported image formats
 
@@ -144,7 +158,7 @@ A BibTeX entry for LaTeX users is:
       doi = {10.32614/CRAN.package.rasterpic},
       author = {Diego Hernangómez},
       year = {2026},
-      version = {0.3.1},
+      version = {0.4.0},
       url = {https://dieghernan.github.io/rasterpic/},
       abstract = {Generate SpatRaster objects, as defined by the terra package, from digital images, using a specified spatial object as a geographical reference.},
     }
