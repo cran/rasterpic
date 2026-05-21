@@ -1,34 +1,38 @@
 Package: rasterpic
 Title: Convert Digital Images into 'SpatRaster' Objects
-Version: 0.4.0
+Version: 0.5.0
 Authors@R: 
     person("Diego", "Hernangómez", , "diego.hernangomezherrero@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0001-8457-4658"))
-Description: Generate 'SpatRaster' objects, as defined by the 'terra'
-    package, from digital images, using a specified spatial object as a
-    geographical reference.
+Description: Create 'SpatRaster' objects, as defined by the 'terra'
+    package, from digital images using a spatial object as a geographic
+    reference. Supported inputs include objects from the 'sf', 'terra' and
+    'stars' packages. The main function is an S3 generic, so other
+    packages can provide methods for additional spatial classes.
 License: MIT + file LICENSE
 URL: https://dieghernan.github.io/rasterpic/,
         https://github.com/dieghernan/rasterpic
 BugReports: https://github.com/dieghernan/rasterpic/issues
 Depends: R (>= 4.1.0)
 Imports: png, sf (>= 1.0.0), terra (>= 1.8-21)
-Suggests: ggplot2, knitr, quarto, testthat (>= 3.0.0), tidyterra
-VignetteBuilder: knitr, quarto
+Suggests: doclisting, ggplot2, knitr, quarto, stars, testthat (>=
+        3.0.0), tidyterra
+VignetteBuilder: quarto
 Config/Needs/check: curl
 Config/Needs/coverage: curl
-Config/Needs/website: dieghernan/gitdevr, tmap, mapsf, maptiles,
-        devtools, curl, remotes, cpp11
+Config/Needs/website: cpp11, curl, devtools, dieghernan/gitdevr, mapsf,
+        maptiles, remotes, tmap
+Config/roxygen2/markdown: TRUE
+Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
-RoxygenNote: 7.3.3
 X-schema.org-keywords: cran, jpeg, jpg, maps, png, r, r-package,
-        r-stats, raster, rstats, sf, terra, tif, tiff, cran-r
+        r-stats, raster, rstats, sf, stars, terra, tif, tiff, cran-r
 NeedsCompilation: no
-Packaged: 2026-03-21 11:10:46 UTC; diego
+Packaged: 2026-05-21 11:01:40 UTC; diego
 Author: Diego Hernangómez [aut, cre, cph] (ORCID:
     <https://orcid.org/0000-0001-8457-4658>)
 Maintainer: Diego Hernangómez <diego.hernangomezherrero@gmail.com>
 Repository: CRAN
-Date/Publication: 2026-03-21 11:20:02 UTC
+Date/Publication: 2026-05-21 11:30:02 UTC

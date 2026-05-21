@@ -3,7 +3,16 @@
 \encoding{UTF-8}
 \name{rasterpic_img}
 \alias{rasterpic_img}
-\title{Convert an image to a geo-tagged \code{SpatRaster}}
+\alias{rasterpic_img.sf}
+\alias{rasterpic_img.sfc}
+\alias{rasterpic_img.sfg}
+\alias{rasterpic_img.stars}
+\alias{rasterpic_img.bbox}
+\alias{rasterpic_img.numeric}
+\alias{rasterpic_img.SpatRaster}
+\alias{rasterpic_img.SpatVector}
+\alias{rasterpic_img.SpatExtent}
+\title{Convert an image into a geotagged \code{SpatRaster}}
 \usage{
 rasterpic_img(
   x,
@@ -12,85 +21,204 @@ rasterpic_img(
   valign = 0.5,
   expand = 0,
   crop = FALSE,
+  ...
+)
+
+\method{rasterpic_img}{sf}(
+  x,
+  img,
+  halign = 0.5,
+  valign = 0.5,
+  expand = 0,
+  crop = FALSE,
+  ...,
+  mask = FALSE,
+  inverse = FALSE
+)
+
+\method{rasterpic_img}{sfc}(
+  x,
+  img,
+  halign = 0.5,
+  valign = 0.5,
+  expand = 0,
+  crop = FALSE,
+  ...,
+  mask = FALSE,
+  inverse = FALSE
+)
+
+\method{rasterpic_img}{sfg}(
+  x,
+  img,
+  halign = 0.5,
+  valign = 0.5,
+  expand = 0,
+  crop = FALSE,
+  ...,
   mask = FALSE,
   inverse = FALSE,
   crs = NULL
 )
+
+\method{rasterpic_img}{stars}(
+  x,
+  img,
+  halign = 0.5,
+  valign = 0.5,
+  expand = 0,
+  crop = FALSE,
+  ...
+)
+
+\method{rasterpic_img}{bbox}(
+  x,
+  img,
+  halign = 0.5,
+  valign = 0.5,
+  expand = 0,
+  crop = FALSE,
+  ...,
+  crs = NULL
+)
+
+\method{rasterpic_img}{numeric}(
+  x,
+  img,
+  halign = 0.5,
+  valign = 0.5,
+  expand = 0,
+  crop = FALSE,
+  ...,
+  crs = NULL
+)
+
+\method{rasterpic_img}{SpatRaster}(
+  x,
+  img,
+  halign = 0.5,
+  valign = 0.5,
+  expand = 0,
+  crop = FALSE,
+  ...
+)
+
+\method{rasterpic_img}{SpatVector}(
+  x,
+  img,
+  halign = 0.5,
+  valign = 0.5,
+  expand = 0,
+  crop = FALSE,
+  ...,
+  mask = FALSE,
+  inverse = FALSE
+)
+
+\method{rasterpic_img}{SpatExtent}(
+  x,
+  img,
+  halign = 0.5,
+  valign = 0.5,
+  expand = 0,
+  crop = FALSE,
+  ...,
+  crs = NULL
+)
 }
 \arguments{
-\item{x}{\strong{R} object that may be:
-\itemize{
-\item An object created with \CRANpkg{sf} of class \code{\link[sf:sf]{sf}},
-\code{\link[sf:sfc]{sfc}}, \code{\link[sf:st]{sfg}} or \code{\link[sf:st_bbox]{bbox}}).
-\item An object created with \CRANpkg{terra} of class
-\code{\link[terra:rast]{SpatRaster}}, \code{\link[terra:vect]{SpatVector}} or
-\code{\link[terra:ext]{SpatExtent}}.
-\item A numeric vector of length 4 with the extent to be used for geotagging
-(i.e. \code{c(xmin, ymin, xmax, ymax)}).
-}}
+\item{x}{An \strong{R} object (see \strong{S3 methods}).}
 
-\item{img}{An image to be geotagged. It can be a local file or an online
-file (e.g. \code{"https://i.imgur.com/6yHmlwT.jpeg"}). The following image
-extensions are accepted:
-\itemize{
-\item \code{png}.
-\item \code{jpeg/jpg}.
-\item \code{tiff/tif}.
-}}
+\item{img}{An image to be geotagged. It can be a local file or a URL
+(e.g. \code{"https://i.imgur.com/6yHmlwT.jpeg"}). Accepted extensions are
+\code{png}, \code{jpeg}/\code{jpg} and \code{tiff}/\code{tif}.}
 
-\item{halign}{Numeric between \code{0} and \code{1} giving horizontal alignment of
+\item{halign}{A number between \code{0} and \code{1} giving the horizontal alignment of
 \code{img} relative to \code{x}. \code{0} aligns \code{x} with the left edge, \code{1} aligns with
-the right edge, and \code{0.5} centers horizontally.}
+the right edge and \code{0.5} centers it horizontally.}
 
-\item{valign}{Numeric between \code{0} and \code{1} giving vertical alignment of \code{img}
-relative to \code{x}. \code{0} aligns \code{x} with the bottom edge, \code{1} aligns with the
-top edge, and \code{0.5} centers vertically.}
+\item{valign}{A number between \code{0} and \code{1} giving the vertical alignment of
+\code{img} relative to \code{x}. \code{0} aligns \code{x} with the bottom edge, \code{1} aligns with
+the top edge and \code{0.5} centers it vertically.}
 
 \item{expand}{An expansion factor of the bounding box of \code{x}. \code{0} means that
-no expansion is added, \code{1} means that the bounding box is expanded to double
-the original size. See \strong{Details}.}
+no expansion is added, \code{1} means that the bounding box is expanded to
+double the original size. See \strong{Details}.}
 
 \item{crop}{Logical. Should the raster be cropped to the (expanded) bounding
 box of \code{x}? See \strong{Details}.}
 
-\item{mask}{Logical, applicable only if \code{x} is a \code{sf}, \code{sfc} or \code{SpatVector}
-object. Should the raster be \link[terra:mask]{masked} to \code{x}? See \strong{Details}.}
+\item{...}{Further arguments passed to methods.}
 
-\item{inverse}{Logical. It only affects when \code{mask = TRUE}. If \code{TRUE}, areas
-on the raster that do not overlap with \code{x} are masked.}
+\item{mask}{Logical, available for vector methods. Should the raster be
+\link[terra:mask]{masked} to the shape of \code{x}? See \strong{Details}.}
 
-\item{crs}{Character string describing a coordinate reference system.
-This parameter only affects when \code{x} is a \code{SpatExtent}, \code{sfg}, \code{bbox} or
-a vector of coordinates. See \strong{CRS} section.}
+\item{inverse}{Logical. This only has an effect when \code{mask = TRUE}. If
+\code{TRUE}, areas of the raster covered by \code{x} are masked.}
+
+\item{crs}{Character string describing a CRS. This parameter only applies
+when \code{x} is a \code{SpatExtent}, \code{sfg}, \code{bbox} or a numeric coordinate vector.
+See \strong{CRS} section.}
 }
 \value{
 A \code{SpatRaster} object (see \code{\link[terra:rast]{terra::rast()}}) where each layer corresponds to
 a color channel of \code{img}:
 \itemize{
-\item If \code{img} has at least 3 channels (e.g. layers), the result will have
-an additional property setting the layers 1 to 3 as the Red, Green and Blue
-channels with names \verb{"r" "g" "b"} and \code{alpha} (if applicable).
-\item If \code{img} already has a definition or RGB values (this may be the case for
-\code{tiff/tif} files) the result will keep that channel definition.
+\item If \code{img} has at least 3 layers, the result will have
+an additional property setting layers 1 to 3 as the red, green and blue
+channels with names \code{"r"}, \code{"g"} and \code{"b"} and \code{alpha} if applicable.
+\item If \code{img} already has a definition of RGB values (this may be the case for
+\code{tiff}/\code{tif} files) the result will keep that channel definition.
 }
 
 The resulting \code{SpatRaster} will have an RGB specification as explained in
 \code{terra::RGB()}.
 }
 \description{
-Geotags an image based on the coordinates of a given spatial object.
+Geotags an image based on the coordinates of a spatial object.
+
+\code{rasterpic_img()} is an S3 generic. \CRANpkg{rasterpic} provides methods for
+the following classes:
+
+\itemize{
+\item \code{SpatExtent}
+\item \code{SpatRaster}
+\item \code{SpatVector}
+\item \code{bbox}
+\item \code{default}
+\item \code{numeric}
+\item \code{sf}
+\item \code{sfc}
+\item \code{sfg}
+\item \code{stars}
+}
 }
 \details{
 \code{vignette("rasterpic", package = "rasterpic")} explains, with examples, the
 effect of parameters \code{halign}, \code{valign}, \code{expand}, \code{crop} and \code{mask}.
+\subsection{S3 methods}{
+
+\CRANpkg{rasterpic} supports the following input classes:
+\itemize{
+\item \strong{sf} classes: \code{sf}, \code{sfc}, \code{sfg} or \code{bbox}.
+\item \strong{terra} classes: \code{SpatRaster}, \code{SpatVector} and \code{SpatExtent}.
+\item \strong{stars} classes: \code{stars}.
+\item A numeric coordinate vector of the form \code{c(xmin, ymin, xmax, ymax)}.
+}
+
+Other packages can provide methods for additional spatial classes.
+
+Methods for extent-like inputs use the object extent. Methods for vector
+inputs can also mask the image to the object shape.
+}
+
 \subsection{CRS}{
 
-The function preserves the Coordinate Reference System of \code{x} if applicable.
-For optimal results \strong{do not use} geographic coordinates
-(longitude/latitude).
+This function preserves the CRS of \code{x} when applicable. For optimal results,
+\strong{do not use} geographic coordinates (longitude/latitude).
 
 \code{crs} can be in a WKT format, as a \code{"authority:number"} code such as
-\code{"EPSG:4326"}, or a PROJ-string format such as \code{"+proj=utm +zone=12"}. It can
+\code{"EPSG:4326"} or a PROJ-string format such as \code{"+proj=utm +zone=12"}. It can
 also be retrieved with:
 \itemize{
 \item \code{\link[sf:st_crs]{sf::st_crs(25830)$wkt}}.
@@ -98,7 +226,7 @@ also be retrieved with:
 \item \code{\link[tidyterra:pull_crs]{tidyterra::pull_crs()}}.
 }
 
-See \strong{Value} and \strong{Notes} on \code{\link[terra:crs]{terra::crs()}}.
+See \strong{Value} and \strong{Notes} in \code{\link[terra:crs]{terra::crs()}}.
 }
 }
 \examples{
@@ -108,81 +236,58 @@ library(terra)
 library(ggplot2)
 library(tidyterra)
 
-
 x_path <- system.file("gpkg/UK.gpkg", package = "rasterpic")
 x <- st_read(x_path, quiet = TRUE)
 img <- system.file("img/vertical.png", package = "rasterpic")
 
-# Default config
+# Default configuration.
 ex1 <- rasterpic_img(x, img)
 
 ex1
 
 autoplot(ex1) +
-  geom_sf(data = x, fill = NA, color = "white", linewidth = .5)
+  geom_sf(data = x, fill = NA, color = "white", linewidth = 0.5)
 
-
-# Expand
+# Expand.
 ex2 <- rasterpic_img(x, img, expand = 0.5)
 
 autoplot(ex2) +
-  geom_sf(data = x, fill = NA, color = "white", linewidth = .5)
+  geom_sf(data = x, fill = NA, color = "white", linewidth = 0.5)
 
-
-# Align
+# Align.
 ex3 <- rasterpic_img(x, img, halign = 0)
 
 autoplot(ex3) +
-  geom_sf(data = x, fill = NA, color = "white", linewidth = .5)
+  geom_sf(data = x, fill = NA, color = "white", linewidth = 0.5)
 labs(title = "Align")
 
-# Crop
+# Crop.
 ex4 <- rasterpic_img(x, img, crop = TRUE)
 
 autoplot(ex4) +
-  geom_sf(data = x, fill = NA, color = "white", linewidth = .5) +
+  geom_sf(data = x, fill = NA, color = "white", linewidth = 0.5) +
   labs(title = "Crop")
 
-# Mask
+# Mask.
 ex5 <- rasterpic_img(x, img, mask = TRUE)
 
 autoplot(ex5) +
-  geom_sf(data = x, fill = NA, color = "white", linewidth = .5) +
+  geom_sf(data = x, fill = NA, color = "white", linewidth = 0.5) +
   labs(title = "Mask")
 
-# Mask inverse
+# Inverse mask.
 ex6 <- rasterpic_img(x, img, mask = TRUE, inverse = TRUE)
 
 autoplot(ex6) +
-  geom_sf(data = x, fill = NA, color = "white", linewidth = .5) +
+  geom_sf(data = x, fill = NA, color = "white", linewidth = 0.5) +
   labs(title = "Mask Inverse")
 
-# Combine Mask inverse and crop
+# Combine inverse masking and cropping.
 ex7 <- rasterpic_img(x, img, crop = TRUE, mask = TRUE, inverse = TRUE)
 
 autoplot(ex7) +
-  geom_sf(data = x, fill = NA, color = "white", linewidth = .5) +
+  geom_sf(data = x, fill = NA, color = "white", linewidth = 0.5) +
   labs(title = "Combine")
-
-# RGB channels ------
-plot(ex1)
-ex_rgb <- ex1
-has.RGB(ex_rgb)
-RGB(ex_rgb)
-
-# Modify RGB channels
-RGB(ex_rgb) <- c(2, 3, 1)
-RGB(ex_rgb)
-
-plot(ex_rgb)
-
-# Remove RGB channels
-RGB(ex_rgb) <- NULL
-has.RGB(ex_rgb)
-RGB(ex_rgb)
-
-# Note the difference with terra::plot
-plot(ex_rgb)
 }
 }
 \seealso{
@@ -196,6 +301,11 @@ From \CRANpkg{sf}:
 \strong{R} objects.
 }
 
+From \CRANpkg{stars}:
+\itemize{
+\item \code{\link[stars:st_as_stars]{stars::st_as_stars()}}.
+}
+
 From \CRANpkg{terra}:
 \itemize{
 \item \code{\link[terra:vect]{terra::vect()}}, \code{\link[terra:rast]{terra::rast()}} and \code{\link[terra:ext]{terra::ext()}}.
@@ -207,16 +317,8 @@ From \CRANpkg{terra}:
 For plotting:
 \itemize{
 \item \code{\link[terra:plot]{terra::plot()}} and \code{\link[terra:plotRGB]{terra::plotRGB()}}.
-\item With \CRANpkg{ggplot2} use \CRANpkg{tidyterra}:
-\itemize{
-\item \code{\link[tidyterra:autoplot.Spat]{tidyterra::autoplot.SpatRaster()}}.
-\item \code{\link[tidyterra:geom_spatraster_rgb]{tidyterra::geom_spatraster_rgb()}}.
-}
-\item Other packages:
-\itemize{
-\item \CRANpkg{tmap}.
-\item \CRANpkg{mapsf}.
-\item \CRANpkg{maptiles}.
-}
+\item \code{\link[tidyterra:autoplot.SpatRaster]{tidyterra::autoplot.SpatRaster()}} and
+\code{\link[tidyterra:geom_spatraster_rgb]{tidyterra::geom_spatraster_rgb()}} with \CRANpkg{ggplot2}.
+\item \CRANpkg{tmap}, \CRANpkg{mapsf} and \CRANpkg{maptiles}.
 }
 }

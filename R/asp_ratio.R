@@ -1,13 +1,14 @@
 #' Compute aspect ratio for spatial input
 #'
 #' @description
-#' Helper function. Ratio is computed as width / height (or cols / rows).
+#' Computes the aspect ratio as width divided by height, or columns divided by
+#' rows.
 #'
-#' @param x A `SpatRaster` object, an `sf`/`sfc` object, or a numeric vector of
-#'   length 4 with coordinates c(`xmin`, `ymin`, `xmax`, `ymax`), as created by
+#' @param x A `SpatRaster` object, an `sf`/`sfc` object or a numeric vector of
+#'   length 4 with coordinates `c(xmin, ymin, xmax, ymax)`, as created by
 #'   [sf::st_bbox()].
 #'
-#' @return The aspect ratio.
+#' @return A numeric scalar giving the aspect ratio.
 #' @export
 #' @encoding UTF-8
 #' @keywords internal
@@ -26,10 +27,10 @@ asp_ratio <- function(x) {
     bbox <- as.double(sf::st_bbox(x))
     ratio <- (bbox[3] - bbox[1]) / (bbox[4] - bbox[2])
   } else if (length(x) == 4 && is.numeric(x)) {
-    # Case of a bbox xmin, ymin, xmax, ymax
+    # Handle a bounding box in `xmin`, `ymin`, `xmax`, `ymax` order.
     ratio <- (x[3] - x[1]) / (x[4] - x[2])
   } else {
-    stop("Don't know how to compute the ratio", call. = FALSE)
+    stop("Cannot compute the aspect ratio for this input.", call. = FALSE)
   }
 
   ratio <- as.double(ratio)

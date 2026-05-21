@@ -1,20 +1,19 @@
 ## -----------------------------------------------------------------------------
 #| label: fig-setup
-#| fig-cap: Raster map geolocated with the coordinates of Austria
+#| fig-cap: Raster map geotagged with the coordinates of Austria
 library(sf)
 library(terra)
 library(rasterpic)
 
-# Plot
+# Load plotting packages.
 library(tidyterra)
 library(ggplot2)
 
-# Shape and image
+# Set the spatial object and image.
 x <- read_sf(system.file("gpkg/austria.gpkg", package = "rasterpic"))
 img <- system.file("img/vertical.png", package = "rasterpic")
 
-# Create the raster!
-
+# Create the raster.
 default <- rasterpic_img(x, img)
 
 autoplot(default) +
@@ -23,7 +22,7 @@ autoplot(default) +
 
 ## -----------------------------------------------------------------------------
 #| label: fig-expand
-#| fig-cap: Example of expansion of image
+#| fig-cap: Example image expansion
 expand <- rasterpic_img(x, img, expand = 1)
 
 autoplot(expand) +
@@ -32,7 +31,7 @@ autoplot(expand) +
 
 ## -----------------------------------------------------------------------------
 #| label: fig-bottom
-#| fig-cap: Example of alignment of image
+#| fig-cap: Example image alignment
 bottom <- rasterpic_img(x, img, valign = 0)
 
 autoplot(bottom) +

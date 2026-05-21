@@ -23,7 +23,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 <!-- badges: end -->
 
 **rasterpic** is a tiny package with a single goal: to transform an
-image into a `SpatRaster` object (see `?terra::SpatRaster`).
+image into a **terra** `SpatRaster` object (see `?terra::SpatRaster`).
 
 ## Installation
 
@@ -40,10 +40,10 @@ install.packages("rasterpic")
 
 <div class="pkgdown-devel">
 
-Check the docs of the developing version in
+Check the documentation for the development version at
 <https://dieghernan.github.io/rasterpic/dev/>.
 
-You can install the developing version of **rasterpic** with:
+You can install the development version of **rasterpic** with:
 
 ``` r
 # install.packages("pak")
@@ -54,7 +54,7 @@ Alternatively, you can install **rasterpic** using the
 [r-universe](https://dieghernan.r-universe.dev/rasterpic):
 
 ``` r
-# Install rasterpic in R:
+# Install rasterpic in R.
 install.packages(
   "rasterpic",
   repos = c(
@@ -68,14 +68,16 @@ install.packages(
 
 ## Example
 
-This package allows you to create custom maps using a wide variety of
-spatial objects:
+You can create custom maps with several spatial input classes:
 
-- Spatial objects created with the **sf** package: `sf`, `sfc`, `sfg`,
-  or `bbox`.
-- Spatial objects created with the **terra** package: `SpatRaster`,
-  `SpatVector`, `SpatExtent`.
+- **sf** classes: `sf`, `sfc`, `sfg` or `bbox`.
+- **terra** classes: `SpatRaster`, `SpatVector` and `SpatExtent`.
+- **stars** classes: `stars`.
 - A numeric coordinate vector of the form `c(xmin, ymin, xmax, ymax)`.
+
+The main function, `rasterpic_img()`, is an S3 generic. The methods for
+extent-like inputs use the object extent, and vector methods can also
+mask the image to the object shape.
 
 An example using an `sf` object:
 
@@ -84,31 +86,29 @@ library(rasterpic)
 library(sf)
 library(terra)
 
-# The flag of the United Kingdom
+# Use the flag of the United Kingdom.
 img <- system.file("img/UK_flag.png", package = "rasterpic")
 uk <- read_sf(system.file("gpkg/UK.gpkg", package = "rasterpic"))
-
 
 class(uk)
 #> [1] "sf"         "tbl_df"     "tbl"        "data.frame"
 
-# Rasterize the image!
+# Rasterize the image.
 uk_flag <- rasterpic_img(uk, img)
 
 uk_flag
-#> class       : SpatRaster 
+#> class       : SpatRaster
 #> size        : 400, 800, 3  (nrow, ncol, nlyr)
 #> resolution  : 5398.319, 5398.319  (x, y)
 #> extent      : -2542183, 1776472, 6430573, 8589900  (xmin, xmax, ymin, ymax)
-#> coord. ref. : WGS 84 / Pseudo-Mercator (EPSG:3857) 
+#> coord. ref. : WGS 84 / Pseudo-Mercator (EPSG:3857)
 #> source(s)   : memory
-#> colors RGB  : 1, 2, 3 
-#> names       :   r,   g,   b 
-#> min values  :   0,  14,  35 
+#> colors rgb  : 1, 2, 3
+#> names       :   r,   g,   b
+#> min values  :   0,  14,  35
 #> max values  : 255, 255, 255
 
-# Plot it!
-# Using ggplot2 + tidyterra
+# Plot with ggplot2 and tidyterra.
 library(tidyterra)
 library(ggplot2)
 
@@ -117,13 +117,13 @@ autoplot(uk_flag) +
 ```
 
 <img src="man/figures/README-example-basic-1.png" style="width:100.0%"
-alt="Example of use of rasterpic with the UK flag" />
+alt="Example using rasterpic with the UK flag" />
 
-We can also adjust other parameters, as well as modifying the alignment
-of the image with respect to the object:
+We can also adjust other parameters and modify the alignment of the
+image with respect to the object:
 
 ``` r
-# Align, crop and mask
+# Align, crop and mask.
 uk_flag2 <- rasterpic_img(uk, img, halign = 0.2, crop = TRUE, mask = TRUE)
 
 autoplot(uk_flag2) +
@@ -131,34 +131,34 @@ autoplot(uk_flag2) +
 ```
 
 <img src="man/figures/README-align-crop-mask-1.png" style="width:100.0%"
-alt="Example of use of rasterpic with the UK flag cropping to the shape" />
+alt="Example using rasterpic with the UK flag cropped to the shape" />
 
 ## Supported image formats
 
 **rasterpic** can parse the following image formats:
 
 - `png` files.
-- `jpg/jpeg` files.
-- `tif/tiff` files.
+- `jpeg`/`jpg` files.
+- `tiff`/`tif` files.
 
 ## Citation
 
 <p>
 
-Hernangómez D (2026). <em>rasterpic: Convert Digital Images into
+Hernangómez D (2026). <em>rasterpic: Convert Digital Images to
 SpatRaster Objects</em>.
-<a href="https://doi.org/10.32614/CRAN.package.rasterpic">doi:10.32614/CRAN.package.rasterpic</a>,
+<a href="https://doi.org/10.32614/CRAN.package.rasterpic">doi:10.32614/CRAN.package.rasterpic</a>.
 <a href="https://dieghernan.github.io/rasterpic/">https://dieghernan.github.io/rasterpic/</a>.
 </p>
 
 A BibTeX entry for LaTeX users is:
 
     @Manual{R-rasterpic,
-      title = {{rasterpic}: Convert Digital Images into {SpatRaster} Objects},
+      title = {{rasterpic}: Convert Digital Images to {SpatRaster} Objects},
       doi = {10.32614/CRAN.package.rasterpic},
       author = {Diego Hernangómez},
       year = {2026},
-      version = {0.4.0},
+      version = {0.5.0},
       url = {https://dieghernan.github.io/rasterpic/},
-      abstract = {Generate SpatRaster objects, as defined by the terra package, from digital images, using a specified spatial object as a geographical reference.},
+      abstract = {Create SpatRaster objects, as defined by the terra package, from digital images using a spatial object as a geographic reference. Supported inputs include objects from the sf, terra and stars packages. The main function is an S3 generic, so other packages can provide methods for additional spatial classes.},
     }
