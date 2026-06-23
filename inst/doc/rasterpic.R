@@ -1,6 +1,6 @@
 ## -----------------------------------------------------------------------------
 #| label: fig-setup
-#| fig-cap: Raster map geotagged with the coordinates of Austria
+#| fig-cap: Image geotagged with the coordinates of Austria.
 library(sf)
 library(terra)
 library(rasterpic)
@@ -13,7 +13,7 @@ library(ggplot2)
 x <- read_sf(system.file("gpkg/austria.gpkg", package = "rasterpic"))
 img <- system.file("img/vertical.png", package = "rasterpic")
 
-# Create the raster.
+# Geotag the image.
 default <- rasterpic_img(x, img)
 
 autoplot(default) +
@@ -22,7 +22,7 @@ autoplot(default) +
 
 ## -----------------------------------------------------------------------------
 #| label: fig-expand
-#| fig-cap: Example image expansion
+#| fig-cap: Example image expansion.
 expand <- rasterpic_img(x, img, expand = 1)
 
 autoplot(expand) +
@@ -31,7 +31,7 @@ autoplot(expand) +
 
 ## -----------------------------------------------------------------------------
 #| label: fig-bottom
-#| fig-cap: Example image alignment
+#| fig-cap: Example image alignment.
 bottom <- rasterpic_img(x, img, valign = 0)
 
 autoplot(bottom) +
@@ -41,8 +41,8 @@ autoplot(bottom) +
 ## -----------------------------------------------------------------------------
 #| label: fig-mask
 #| fig-cap:
-#|   - Example of masked image
-#|   - Example of inverse masked image
+#|   - Example masked image.
+#|   - Example inverse masked image.
 mask <- rasterpic_img(x, img, crop = TRUE, mask = TRUE)
 
 autoplot(mask)

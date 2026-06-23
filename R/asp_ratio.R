@@ -1,17 +1,17 @@
 #' Compute aspect ratio for spatial input
 #'
 #' @description
-#' Computes the aspect ratio as width divided by height, or columns divided by
+#' Compute the aspect ratio as width divided by height, or columns divided by
 #' rows.
 #'
-#' @param x A `SpatRaster` object, an `sf`/`sfc` object or a numeric vector of
-#'   length 4 with coordinates `c(xmin, ymin, xmax, ymax)`, as created by
+#' @param x A `SpatRaster` object, an `sf` or `sfc` object or a numeric vector
+#'   of length 4 with coordinates `c(xmin, ymin, xmax, ymax)`, as created by
 #'   [sf::st_bbox()].
 #'
 #' @return A numeric scalar giving the aspect ratio.
+#' @keywords internal
 #' @export
 #' @encoding UTF-8
-#' @keywords internal
 #' @examples
 #' \donttest{
 #' library(terra)
@@ -30,7 +30,7 @@ asp_ratio <- function(x) {
     # Handle a bounding box in `xmin`, `ymin`, `xmax`, `ymax` order.
     ratio <- (x[3] - x[1]) / (x[4] - x[2])
   } else {
-    stop("Cannot compute the aspect ratio for this input.", call. = FALSE)
+    cli::cli_abort("Cannot compute the aspect ratio for {.arg x}.")
   }
 
   ratio <- as.double(ratio)
